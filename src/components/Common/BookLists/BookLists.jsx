@@ -15,8 +15,8 @@ const BookLists = ({ loading, books }) => {
                     loading ?
                         <FidgetSpinner
                             visible={true}
-                            height="100"
-                            width="100"
+                            height="350"
+                            width="350"
                             ariaLabel="fidget-spinner-loading"
                             wrapperStyle={{}}
                             wrapperClass="fidget-spinner-wrapper"

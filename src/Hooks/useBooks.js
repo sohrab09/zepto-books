@@ -6,22 +6,31 @@ const useBooks = () => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        setLoading(true);
-        const getBooks = async () => {
-            try {
-                axios.get("https://gutendex.com/books")
-                    .then((res) => {
-                        // console.log("res", res.data.results);
-                        setBooks(res.data.results);
-                        setLoading(false);
-                    })
-            } catch (error) {
-                console.error("Fetch books error -------->>>>> ", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        getBooks();
+        const cachedBooks = localStorage.getItem('booksCache');
+        const cacheTimestamp = localStorage.getItem('booksCacheTimestamp');
+        const cacheExpiry = 24 * 60 * 60 * 1000;
+
+        if (cachedBooks && cacheTimestamp && (Date.now() - cacheTimestamp < cacheExpiry)) {
+            setBooks(JSON.parse(cachedBooks));
+            setLoading(false);
+        } else {
+            const getBooks = async () => {
+                setLoading(true);
+                try {
+                    const response = await axios.get("https://gutendex.com/books");
+                    const fetchedBooks = response.data.results;
+
+                    setBooks(fetchedBooks);
+                    localStorage.setItem('booksCache', JSON.stringify(fetchedBooks));
+                    localStorage.setItem('booksCacheTimestamp', Date.now());
+                } catch (error) {
+                    console.error("Fetch books error -------->>>>> ", error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            getBooks();
+        }
     }, []);
 
     return { loading, books };
