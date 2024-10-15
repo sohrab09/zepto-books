@@ -84,3 +84,56 @@
     width: 96%;
   }
 }
+
+.filter-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.filter-wrap label {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.filter-wrap select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #555;
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  appearance: none;
+  outline: none;
+  transition: border 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.filter-wrap select:hover {
+  border-color: #888;
+}
+
+.filter-wrap select:focus {
+  border-color: #007bff;
+}
+
+.filter-wrap select option {
+  padding: 10px;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Custom arrow styling */
+.filter-wrap select {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}

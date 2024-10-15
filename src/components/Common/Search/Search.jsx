@@ -1,21 +1,31 @@
-import { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import './Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-
-const Search = () => {
-
+const Search = ({ books = [], onFilterAndSearch }) => {
     const [searchVal, setSearchVal] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState("All");
 
     const handleInput = (e) => {
-        setSearchVal(e.target.value);
+        const value = e.target.value;
+        setSearchVal(value);
+        onFilterAndSearch(value, selectedGenre);
     };
 
     const handleClearBtn = () => {
         setSearchVal('');
+        onFilterAndSearch('', selectedGenre);
     };
 
+    const handleDropdownChange = (e) => {
+        const genre = e.target.value;
+        setSelectedGenre(genre);
+        onFilterAndSearch(searchVal, genre);
+    };
+
+    const genres = Array.isArray(books) ? [...new Set(books.flatMap(book => book.subjects))] : [];
 
     return (
         <div className='container'>
@@ -26,12 +36,7 @@ const Search = () => {
                     color='white'
                     style={{ fontSize: '2rem' }}
                 />
-                <label
-                    htmlFor="book-search"
-                    id="input-label"
-                >
-                    Book Search
-                </label>
+                <label htmlFor="book-search" id="input-label">Book Search</label>
                 <input
                     onChange={handleInput}
                     value={searchVal}
@@ -50,8 +55,25 @@ const Search = () => {
                     />
                 }
             </div>
+
+            <div className="filter-wrap">
+                <label htmlFor="genre-filter">Filter by Genre/Topic:</label>
+                <select
+                    name="genre-filter"
+                    id="genre-filter"
+                    value={selectedGenre}
+                    onChange={handleDropdownChange}
+                >
+                    <option value="All">All</option>
+                    {genres.map((genre, index) => (
+                        <option key={index} value={genre}>
+                            {genre}
+                        </option>
+                    ))}
+                </select>
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default Search;
