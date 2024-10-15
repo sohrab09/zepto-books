@@ -1,25 +1,29 @@
 /* eslint-disable react/prop-types */
+
 import './Pagination.css';
 
+const Pagination = ({ booksPerPage, totalBooks, paginate, currentPage }) => {
+    const pageNumbers = [];
 
-const Pagination = ({ loading, currentPage, totalPages, paginate }) => {
+    for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
     return (
-        <div>
-            {!loading && (
-                <div className="pagination">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                            key={index + 1}
-                            onClick={() => paginate(index + 1)}
-                            className={currentPage === index + 1 ? 'active' : ''}
-                        >
-                            {index + 1}
-                        </button>
+        <div className='pagination'>
+            <nav className="pagination-nav">
+                <ul className="pagination-list">
+                    {pageNumbers.map(number => (
+                        <li key={number} className={number === currentPage ? "active" : ""}>
+                            <button onClick={() => paginate(number)} className="page-link">
+                                {number}
+                            </button>
+                        </li>
                     ))}
-                </div>
-            )}
+                </ul>
+            </nav>
         </div>
-    )
-}
+    );
+};
 
 export default Pagination;
