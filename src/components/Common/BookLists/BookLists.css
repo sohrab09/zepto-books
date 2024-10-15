@@ -25,6 +25,8 @@
   border-radius: 6px;
   padding: 36px 32px 32px 32px;
   transition: all 0.3s ease;
+  height: object-fit;
+  width: object-fit;
 }
 
 .book-items .book-item-content {
@@ -70,12 +72,12 @@
 }
 
 .book-items .book-image {
-  width: 50%;
-  height: 50%;
+  width: 30%;
+  height: 30%;
   object-fit: cover;
   display: block;
   margin: 0 auto;
-  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 768px) {
