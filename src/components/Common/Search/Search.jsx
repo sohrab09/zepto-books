@@ -40,13 +40,15 @@ const Search = () => {
                     id="book-search"
                     placeholder="Search Book"
                 />
-                <FontAwesomeIcon
-                    className="fas fa-times"
-                    icon={faXmark}
-                    onClick={handleClearBtn}
-                    style={{ fontSize: '2rem' }}
-                    color='white'
-                />
+                {
+                    searchVal && <FontAwesomeIcon
+                        className="fas fa-times"
+                        icon={faXmark}
+                        onClick={handleClearBtn}
+                        style={{ fontSize: '2rem' }}
+                        color='white'
+                    />
+                }
             </div>
         </div>
     )

@@ -1,0 +1,93 @@
+.py-7 {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.my-6 {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.book-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.book-items {
+  display: grid;
+  row-gap: 35px;
+}
+
+.book-items .book-item {
+  background-color: #ffffff;
+  box-shadow: rgba(100, 100, 111, 0.15) 0px 7px 10px 0px;
+  border-radius: 6px;
+  padding: 36px 32px 32px 32px;
+  transition: all 0.3s ease;
+}
+
+.book-items .book-item-content {
+  font-size: 15px;
+  margin-bottom: 8px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.book-items .book-item-btn .add-wishlist-btn {
+  font-size: 18px;
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 10px;
+  border: 1px solid #3f0085;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.book-items .book-item-btn .add-wishlist-btn:hover {
+  color: #fff;
+  transform: scale(0.95);
+  border-color: #ffff;
+}
+
+.book-items .book-item:hover {
+  background-color: #3f0085;
+  color: #fff;
+  box-shadow: rgba(130, 0, 221, 0.15) 0px 7px 10px 0px;
+}
+
+.book-items .book-item:hover .book-item-btn .add-wishlist-btn {
+  border-color: #fff;
+}
+
+.book-items .book-item:hover .book-item-tags-single {
+  background-color: #fff !important;
+  color: #6f42c1;
+}
+
+.book-items .book-image {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .book-items {
+    column-gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .book-items {
+    column-gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
