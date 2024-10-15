@@ -1,16 +1,29 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react';
 import './BookLists.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { FidgetSpinner } from 'react-loader-spinner'
+import { FidgetSpinner } from 'react-loader-spinner';
+import Pagination from '../../Pagination/Pagination';
 
 const BookLists = ({ loading, books }) => {
 
+    const dataPerPage = 6;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const indexOfLastBook = currentPage * dataPerPage;
+    const indexOfFirstBook = indexOfLastBook - dataPerPage;
+    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+
+    const totalPages = Math.ceil(books.length / dataPerPage);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
     return (
         <section className='book-container'>
-
             <div className="book-items my-6">
-
                 {
                     loading ?
                         <FidgetSpinner
@@ -22,7 +35,7 @@ const BookLists = ({ loading, books }) => {
                             wrapperClass="fidget-spinner-wrapper"
                         />
                         :
-                        books.map((book, index) => {
+                        currentBooks.map((book, index) => {
                             return (
                                 <div className="book-item" key={index}>
                                     <img src={book.formats["image/jpeg"]} alt="bookImage" className='book-image' />
@@ -70,10 +83,17 @@ const BookLists = ({ loading, books }) => {
                             )
                         })
                 }
-
             </div>
-        </section>
-    )
-}
 
-export default BookLists
+            <Pagination
+                loading={loading}
+                totalPages={totalPages}
+                currentPage={currentPage}
+                paginate={paginate}
+            />
+
+        </section>
+    );
+};
+
+export default BookLists;
