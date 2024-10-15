@@ -1,31 +1,33 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
 import './BookLists.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FidgetSpinner } from 'react-loader-spinner';
-import Pagination from '../../Pagination/Pagination';
+import { useContext } from 'react';
+import { WishlistContext } from '../../Context/WishlistContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons/faHeartCirclePlus';
+import { faHeartCircleMinus } from '@fortawesome/free-solid-svg-icons/faHeartCircleMinus';
+
 
 const BookLists = ({ loading, books }) => {
+    const { wishlist, addToWishlist, removeFromWishlist } = useContext(WishlistContext);
 
-    const dataPerPage = 6;
-    const [currentPage, setCurrentPage] = useState(1);
+    const isBookInWishlist = (bookId) => {
+        return wishlist.some(book => book.id === bookId);
+    };
 
-    const indexOfLastBook = currentPage * dataPerPage;
-    const indexOfFirstBook = indexOfLastBook - dataPerPage;
-    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-
-    const totalPages = Math.ceil(books.length / dataPerPage);
-
-    const paginate = (pageNumber) => {
-        setCurrentPage(pageNumber);
+    const handleWishlistToggle = (book) => {
+        if (isBookInWishlist(book.id)) {
+            removeFromWishlist(book.id);
+        } else {
+            addToWishlist(book);
+        }
     };
 
     return (
         <section className='book-container'>
             <div className="book-items my-6">
                 {
-                    loading ?
+                    loading ? (
                         <FidgetSpinner
                             visible={true}
                             height="350"
@@ -34,10 +36,34 @@ const BookLists = ({ loading, books }) => {
                             wrapperStyle={{}}
                             wrapperClass="fidget-spinner-wrapper"
                         />
-                        :
-                        currentBooks.map((book, index) => {
+                    ) : (
+                        books.map((book, index) => {
+                            const inWishlist = isBookInWishlist(book.id);
                             return (
                                 <div className="book-item" key={index}>
+                                    <div className='book-item-btn'>
+                                        <div
+                                            className="add-wishlist-btn"
+                                            onClick={() => handleWishlistToggle(book)}
+                                        >
+                                            {
+                                                inWishlist ? (
+                                                    <FontAwesomeIcon
+                                                        icon={faHeartCircleMinus}
+                                                        size='2x'
+                                                        color='red'
+                                                    />
+                                                ) : (
+                                                    <FontAwesomeIcon
+                                                        icon={faHeartCirclePlus}
+                                                        size='2x'
+                                                        color='green'
+                                                    />
+                                                )
+                                            }
+
+                                        </div>
+                                    </div>
                                     <img src={book.formats["image/jpeg"]} alt="bookImage" className='book-image' />
                                     <div className='book-item-content'>
                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -69,29 +95,12 @@ const BookLists = ({ loading, books }) => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className='book-item-btn'>
-                                        <div className="add-wishlist-btn">
-                                            Add wishlist
-                                            {" "}
-                                            <FontAwesomeIcon
-                                                icon={faHeart}
-                                                size='lg'
-                                            />
-                                        </div>
-                                    </div>
                                 </div>
                             )
                         })
+                    )
                 }
             </div>
-
-            <Pagination
-                loading={loading}
-                totalPages={totalPages}
-                currentPage={currentPage}
-                paginate={paginate}
-            />
-
         </section>
     );
 };

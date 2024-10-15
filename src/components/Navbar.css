@@ -141,3 +141,13 @@
     color: #ffdd40;
   }
 }
+
+.wishlist-count {
+  background-color: #ffdd40;
+  color: #1f5156;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transform: translate(50%, -50%);
+}

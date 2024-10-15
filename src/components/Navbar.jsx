@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseChimney } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { WishlistContext } from "./Context/WishlistContext";
 
 function NavBar() {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
+
+    const { wishlist } = useContext(WishlistContext);
+
+    console.log("wishlist", wishlist);
+
     return (
         <>
             <nav className="navbar">
@@ -47,7 +53,13 @@ function NavBar() {
                                 {" "}
                                 Wishlist
                                 {" "}
-                                10
+                                {
+                                    wishlist.length > 0 && (
+                                        <span className="wishlist-count">
+                                            {wishlist.length}
+                                        </span>
+                                    )
+                                }
                             </NavLink>
                         </li>
                     </ul>
