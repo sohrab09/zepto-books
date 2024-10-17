@@ -14,8 +14,6 @@ function NavBar() {
 
     const { wishlist } = useContext(WishlistContext);
 
-    console.log("wishlist", wishlist);
-
     return (
         <>
             <nav className="navbar">
