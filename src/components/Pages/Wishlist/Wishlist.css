@@ -1,107 +1,64 @@
-.wishlist-container {
+.favorite-items {
   max-width: 1200px;
   margin: 20px auto;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
+  text-align: center;
+  padding: 40px;
   background-color: #ffffff49;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.book-and-wishlist {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.wishlist-icon {
-  cursor: pointer;
-}
-
-.image-section {
-  flex: 1;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.main-image {
-  width: 100%;
-  max-width: 550px;
-  height: 550px;
-  margin-bottom: 20px;
-}
-
-.thumbnail-images {
-  display: flex;
-  gap: 10px;
-}
-
-.thumbnail-images img {
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.details-section {
-  flex: 2;
-  max-width: 500px;
-  padding: 20px;
-}
-
-.details-section h2 {
-  font-size: 24px;
+.favorite-items h2 {
+  font-size: 50px;
   font-weight: bold;
 }
 
-.author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+.favorite-items p {
+  font-size: 20px;
+  color: #777;
 }
 
-.author a {
-  color: #007bff;
-  text-decoration: none;
+.favorite-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.description {
-  margin: 10px 0;
+.favorite-table th,
+.favorite-table td {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px;
+}
+
+.favorite-table th {
+  font-weight: bold;
   color: #555;
 }
 
-.book-shelves {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px 0;
-  color: #555;
-}
-
-.features li {
-  margin-bottom: 5px;
-}
-
-.language-section,
-.quantity-section {
+.product-info {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
-.no-items {
+.product-info img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.author-name {
+  color: #888;
+  margin-right: 10px;
+}
+
+.delete-icon:hover {
+  color: #000;
+}
+
+.empty-wishlist {
+  font-size: 20px;
+  color: #555;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,16 +70,21 @@
   padding: 0;
 }
 
-@media (max-width: 768px) {
-  .book-container {
-    flex-direction: column;
+@media screen and (max-width: 600px) {
+  .favorite-items {
+    padding: 20px;
   }
 
-  .image-section {
-    max-width: 100%;
+  .favorite-table {
+    font-size: 10px;
   }
 
-  .details-section {
-    max-width: 100%;
+  .add-to-cart-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .delete-icon {
+    font-size: 12px;
   }
 }

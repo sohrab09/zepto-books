@@ -6,9 +6,13 @@ import { WishlistContext } from '../../Context/WishlistContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons/faHeartCirclePlus';
 import { faHeartCircleMinus } from '@fortawesome/free-solid-svg-icons/faHeartCircleMinus';
+import { useNavigate } from 'react-router-dom';
 
 
 const BookLists = ({ loading, books }) => {
+
+    const navigate = useNavigate();
+
     const { wishlist, addToWishlist, removeFromWishlist } = useContext(WishlistContext);
 
     const isBookInWishlist = (bookId) => {
@@ -21,6 +25,10 @@ const BookLists = ({ loading, books }) => {
         } else {
             addToWishlist(book);
         }
+    };
+
+    const handleBookDetails = (book) => {
+        navigate(`/book/${book.id}`, { state: { book } });
     };
 
     return (
@@ -95,6 +103,22 @@ const BookLists = ({ loading, books }) => {
                                             </span>
                                         </div>
                                     </div>
+
+                                    <br />
+                                    <br />
+
+                                    <div className='book-item-content'>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                            <span></span>
+                                            <button className='book-details-btn' onClick={() => handleBookDetails(book)}>View Details</button>
+                                            <span></span>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <br />
+                                    <br />
+
                                 </div>
                             )
                         })
