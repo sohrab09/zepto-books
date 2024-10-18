@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -8,20 +8,42 @@ const Search = ({ books = [], onFilterAndSearch }) => {
     const [searchVal, setSearchVal] = useState('');
     const [selectedGenre, setSelectedGenre] = useState("All");
 
+    // Load preferences from localStorage when component mounts
+    useEffect(() => {
+        const savedSearchVal = localStorage.getItem('searchVal') || '';
+        const savedGenre = localStorage.getItem('selectedGenre') || 'All';
+
+        setSearchVal(savedSearchVal);
+        setSelectedGenre(savedGenre);
+
+        // Apply saved preferences to filter and search
+        onFilterAndSearch(savedSearchVal, savedGenre);
+    }, [onFilterAndSearch]);
+
     const handleInput = (e) => {
         const value = e.target.value;
         setSearchVal(value);
+
+        // Save searchVal to localStorage
+        localStorage.setItem('searchVal', value);
+
         onFilterAndSearch(value, selectedGenre);
     };
 
     const handleClearBtn = () => {
         setSearchVal('');
+        localStorage.setItem('searchVal', ''); // Clear from localStorage
+
         onFilterAndSearch('', selectedGenre);
     };
 
     const handleDropdownChange = (e) => {
         const genre = e.target.value;
         setSelectedGenre(genre);
+
+        // Save selectedGenre to localStorage
+        localStorage.setItem('selectedGenre', genre);
+
         onFilterAndSearch(searchVal, genre);
     };
 

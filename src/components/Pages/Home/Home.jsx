@@ -11,19 +11,25 @@ export const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const booksPerPage = 6;
 
+    // Load search and genre from localStorage (if available)
     useEffect(() => {
-        setFilteredBooks(books);
+        const savedSearchVal = localStorage.getItem('searchVal') || '';
+        const savedGenre = localStorage.getItem('selectedGenre') || 'All';
+
+        handleFilterAndSearch(savedSearchVal, savedGenre);
     }, [books]);
 
     const handleFilterAndSearch = (searchVal, selectedGenre) => {
         let filtered = books;
 
+        // Filter by genre
         if (selectedGenre && selectedGenre !== "All") {
             filtered = filtered.filter(book =>
                 book.subjects && book.subjects.includes(selectedGenre)
             );
         }
 
+        // Filter by search term
         if (searchVal) {
             filtered = filtered.filter(book =>
                 book.title && book.title.toLowerCase().includes(searchVal.toLowerCase())
