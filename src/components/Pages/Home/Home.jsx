@@ -1,9 +1,9 @@
 import useBooks from "../../../Hooks/useBooks";
-import BookLists from "../../Common/BookLists/BookLists";
 import Search from "../../Common/Search/Search";
 import { useState, useEffect } from "react";
 import './Home.css';
 import Pagination from "../../Pagination/Pagination";
+import BookList from "../../BookList/BookList";
 
 export const Home = () => {
     const { loading, books } = useBooks();
@@ -48,10 +48,12 @@ export const Home = () => {
                 books={books}
                 onFilterAndSearch={handleFilterAndSearch}
             />
-            <BookLists
-                loading={loading}
+
+            <BookList
                 books={currentBooks}
+                loading={loading}
             />
+
             <Pagination
                 booksPerPage={booksPerPage}
                 totalBooks={filteredBooks.length}

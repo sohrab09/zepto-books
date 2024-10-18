@@ -2,9 +2,6 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouseChimney } from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { WishlistContext } from "./Context/WishlistContext";
 
 function NavBar() {
@@ -19,7 +16,7 @@ function NavBar() {
             <nav className="navbar">
                 <div className="nav-container">
                     <NavLink exact to="/" className="nav-logo">
-                        <span>Zepto Books</span>
+                        <span className="logo">Zepto Books</span>
                         <span className="icon">
                             <CodeIcon />
                         </span>
@@ -34,7 +31,6 @@ function NavBar() {
                                 className="nav-links"
                                 onClick={handleClick}
                             >
-                                <FontAwesomeIcon icon={faHouseChimney} />
                                 {" "}
                                 Home
                             </NavLink>
@@ -47,8 +43,6 @@ function NavBar() {
                                 className="nav-links"
                                 onClick={handleClick}
                             >
-                                <FontAwesomeIcon icon={faHeart} />
-                                {" "}
                                 Wishlist
                                 {" "}
                                 {
