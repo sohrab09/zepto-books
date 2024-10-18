@@ -5,8 +5,17 @@ import { Wishlist } from "./components/Pages/Wishlist/Wishlist";
 import NavBar from "./components/Navbar";
 import { WishlistProvider } from "./components/Context/WishlistContext";
 import { BookInfo } from "./components/Pages/BookInfo/BookInfo";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
 
 function App() {
+
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, [])
+
   return (
     <WishlistProvider>
       <Router>
